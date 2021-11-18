@@ -5,6 +5,9 @@ import sys
 
 
 def main():
+
+    sys.path.insert(0, "/home/ap/board_games/bg_env/lib/python3.8/site-packages")
+
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'board_games.settings')
     try:
