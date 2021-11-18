@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Our apps
+    'bg_app',
+
+    # Defaul Django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
