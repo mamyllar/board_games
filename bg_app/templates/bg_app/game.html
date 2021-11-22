@@ -1,0 +1,19 @@
+{% extends "bg_app/base.html" %}
+
+{% block content %}
+
+<p>Game: {{ game }}</p>
+
+<p>Loan:</p>
+<ul>
+    {% for loan in loans %} 
+        <li>
+            <p>{{ loan.date_loaned|date:'M d, Y H:i' }}</p> 
+            <p>{{ loan.loaner|linebreaks }}</p>
+        </li>
+    {% empty %}
+        <li> This game is available for loaning.</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}

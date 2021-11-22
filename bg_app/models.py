@@ -14,3 +14,16 @@ class Game(models.Model):
     def __str__(self):
     #return a string representation of the model
         return self.name
+
+
+class Loan(models.Model):
+    #info about the loans
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    loaner = models.TextField()
+    date_loaned = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        #Return a string representation of the model.
+        return self.loaner + " has loaned " + self.game.__str__()
+    

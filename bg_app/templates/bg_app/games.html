@@ -1,0 +1,19 @@
+{% extends "bg_app/base.html" %}
+
+{% block content %}
+
+<p>Games</p>
+
+<ul>
+    {% for game in games %}
+        <li>
+            <a href="{% url 'bg_app:game' game.id %}">{{ game }}</a> 
+        </li>
+    {% empty %}
+        <li>No games have been added yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'bg_app:new_game' %}">Add a new game</a>
+
+{% endblock content %}
