@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 from .models import Game, Loan 
 from .forms import GameForm, LoanForm
+
 
 # Create your views here
 
@@ -9,11 +10,13 @@ def index(request):
     # Home page for Board Games
     return render(request, 'bg_app/index.html')
 
+@login_required
 def games(request):
     # Show all games
     games = Game.objects.order_by('name')
     context = {'games': games}
     return render(request, 'bg_app/games.html', context)
+
 
 def game(request, game_id):
     # Show a single game and its loan info
