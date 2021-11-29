@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-from .models import Game
-from .forms import GameForm
+from .models import Game, Loan 
+from .forms import GameForm, LoanForm
 
 # Create your views here
 
@@ -37,3 +37,64 @@ def new_game(request):
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'bg_app/new_game.html', context)
+
+
+def new_loan(request, game_id):
+    # Add a new loan for a particular game.
+    game = Game.objects.get(id=game_id)
+
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = LoanForm()
+
+    else:
+        # POST data submitted; process data.
+        form = LoanForm(data=request.POST)
+        if form.is_valid():
+            new_loan = form.save(commit=False)
+            new_loan.game = game
+            new_loan.save()
+            return redirect('bg_app:game', game_id=game_id) 
+
+    # Display a blank or invalid form
+    context = {'game': game, 'form': form}
+    return render(request, 'bg_app/new_loan.html', context)
+
+def new_loan(request, game_id):
+    # Add a new loan for a particular game.
+    game = Game.objects.get(id=game_id)
+
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = LoanForm()
+
+    else:
+        # POST data submitted; process data.
+        form = LoanForm(data=request.POST)
+        if form.is_valid():
+            new_loan = form.save(commit=False)
+            new_loan.game = game
+            new_loan.save()
+            return redirect('bg_app:game', game_id=game_id) 
+
+    # Display a blank or invalid form
+    context = {'game': game, 'form': form}
+    return render(request, 'bg_app/new_loan.html', context)    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

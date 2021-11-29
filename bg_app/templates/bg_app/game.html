@@ -5,6 +5,11 @@
 <p>Game: {{ game }}</p>
 
 <p>Loan:</p>
+
+<p>
+    <a href="{% url 'bg_app:new_loan' game.id %}">Borrow this game</a>
+</p>
+
 <ul>
     {% for loan in loans %} 
         <li>

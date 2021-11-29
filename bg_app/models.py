@@ -20,6 +20,7 @@ class Loan(models.Model):
     #info about the loans
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     loaner = models.TextField()
+    comment = models.TextField(max_length=300, blank=True, default='')#loaner may comment their loan
     date_loaned = models.DateTimeField(auto_now_add=True)
 
 
