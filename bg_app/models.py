@@ -7,6 +7,8 @@ class Game(models.Model):
     number_of_players = models.CharField(max_length=20) #number of the players 
     year_published = models.IntegerField() #year the game is published
 
+    is_loaned = models.BooleanField(default=False)
+
     date_added = models.DateTimeField(auto_now_add=True) #automatically save the date when added
     date_modified = models.DateTimeField(auto_now=True) #automatically save the date when modified 
 

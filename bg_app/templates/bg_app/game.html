@@ -7,17 +7,24 @@
 <p>Loan:</p>
 
 <p>
-    <a href="{% url 'bg_app:new_loan' game.id %}">Borrow this game</a>
+    <a href="{% url 'bg_app:edit_game' game.id %}">Edit game</a>
 </p>
+
 
 <ul>
     {% for loan in loans %} 
         <li>
             <p>{{ loan.date_loaned|date:'M d, Y H:i' }}</p> 
             <p>{{ loan.loaner|linebreaks }}</p>
+            <p>
+                <a href="{% url 'bg_app:edit_loan' loan.id %}">Edit loan</a>
+            </p>
         </li>
     {% empty %}
         <li> This game is available for loaning.</li>
+        <p>
+            <a href="{% url 'bg_app:new_loan' game.id %}">Borrow this game</a>
+        </p>
     {% endfor %}
 </ul>
 

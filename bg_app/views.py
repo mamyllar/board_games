@@ -60,28 +60,42 @@ def new_loan(request, game_id):
     context = {'game': game, 'form': form}
     return render(request, 'bg_app/new_loan.html', context)
 
-def new_loan(request, game_id):
-    # Add a new loan for a particular game.
+def edit_game(request, game_id):
+    # Edit an existing loan 
     game = Game.objects.get(id=game_id)
 
     if request.method != 'POST':
-        # No data submitted; create a blank form.
-        form = LoanForm()
+        # Initial request; pre-fill form with the current info
+        form = GameForm(instance=game)
 
     else:
         # POST data submitted; process data.
-        form = LoanForm(data=request.POST)
+        form = GameForm(instance=game, data=request.POST)
         if form.is_valid():
-            new_loan = form.save(commit=False)
-            new_loan.game = game
-            new_loan.save()
+            form.save()
             return redirect('bg_app:game', game_id=game_id) 
 
-    # Display a blank or invalid form
     context = {'game': game, 'form': form}
-    return render(request, 'bg_app/new_loan.html', context)    
+    return render(request, 'bg_app/edit_game.html', context)    
 
+def edit_loan(request, loan_id):
+    # Edit an existing loan 
+    loan = Loan.objects.get(id=loan_id)
+    game = loan.game
 
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current info
+        form = LoanForm(instance=loan)
+
+    else:
+        # POST data submitted; process data.
+        form = LoanForm(instance=loan, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('bg_app:game', game_id=game.id) 
+
+    context = {'loan': loan, 'game': game, 'form': form}
+    return render(request, 'bg_app/edit_loan.html', context)   
 
 
 

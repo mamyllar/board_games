@@ -1,0 +1,15 @@
+{% extends "bg_app/base.html" %}
+
+{% block content %}
+
+    <p><a href="{% url 'bg_app:game' game.id %}">{{ game }}</a></p>
+
+    <p>Edit loan:</p>
+
+    <form action="{% url 'bg_app:edit_loan' loan.id %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <button name="submit">Save changes</button>
+    </form>
+
+{% endblock content %}
