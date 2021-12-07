@@ -1,19 +1,24 @@
 {% extends "bg_app/base.html" %}
 
+{% block page_header %}
+    <h1>Games</h1>
+{% endblock page_header %}
+
 {% block content %}
-
-<p>Games</p>
-
 <ul>
     {% for game in games %}
-        <li>
+        <li><h3>
             <a href="{% url 'bg_app:game' game.id %}">{{ game }}</a> 
-        </li>
+        </h3></li>
     {% empty %}
-        <li>No games have been added yet.</li>
+        <li><h3>No games have been added yet.</li></h3>
     {% endfor %}
 </ul>
 
-<a href="{% url 'bg_app:new_game' %}">Add a new game</a>
+
+<h3><a href="{% url 'bg_app:new_game' %}">
+    <button name="submit" style="color:brown">Add a new game</button>
+        <input type="hidden" name="next" value="{% url 'bg_app:index' %}" />
+    </a></h3>
 
 {% endblock content %}

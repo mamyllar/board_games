@@ -1,10 +1,14 @@
 {% extends "bg_app/base.html" %}
 
-{% block content %}
+{% block page_header %}
+   <div class="jumbotron">
+      <h1 class="display-3 text-info">Borrow your games here!</h1>
 
-<p>Board Games is an app which helps you to track games and their loans. 
-   You are most welcome to use this app. Just click the name of the game and fill in the details. 
-   Now you may borrow the game. 
-</p>
+      <p class="lead">Board Games is an app which helps you to track games and their loans. 
+         You are most welcome to use this app. Just click the name of the game and fill in the details. 
+         Now you may borrow the game.</p>
 
-{% endblock content %}
+      <a class="btn btn-lg btn-success" href="{% url 'users:register' %}"
+         role="button">Register &raquo;</a>   
+   </div>
+{% endblock page_header %}

@@ -35,6 +35,9 @@ INSTALLED_APPS = [
     'bg_app',
     'users',
 
+    # Third party apps
+    'bootstrap4',
+
     # Defaul Django apps
     'django.contrib.admin',
     'django.contrib.auth',

@@ -7,7 +7,7 @@
 <form action="{% url 'bg_app:new_game' %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }} 
-    <button name="submit">Add game</button>
+    <button name="submit" style="color:brown">Add game</button>
 </form>
 
 {% endblock content %}

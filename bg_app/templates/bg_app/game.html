@@ -1,11 +1,10 @@
 {% extends "bg_app/base.html" %}
 
+{% block page_header %}
+    <h3>{{ game }}</h3>
+{% endblock page_header %}
+
 {% block content %}
-
-<p>Game: {{ game }}</p>
-
-<p>Loan:</p>
-
 <p>
     <a href="{% url 'bg_app:edit_game' game.id %}">Edit game</a>
 </p>
@@ -13,19 +12,18 @@
 
 <ul>
     {% for loan in loans %} 
-        <li>
-            <p>{{ loan.date_loaned|date:'M d, Y H:i' }}</p> 
-            <p>{{ loan.loaner|linebreaks }}</p>
-            <p>
-                <a href="{% url 'bg_app:edit_loan' loan.id %}">Edit loan</a>
-            </p>
-        </li>
+        <div class="card mb-3">
+            <h4 class="card-header">
+                {{ loan.date_loaned|date:'M d, Y H:i' }}
+                <small><a href="{% url 'bg_app:edit_loan' loan.id %}">
+                    edit loan</a></small>
+            </h4>
+            <div class="card-body">
+                {{ loan.loaner|linebreaks }}
+            </div>
+        </div>
     {% empty %}
-        <li> This game is available for loaning.</li>
-        <p>
-            <a href="{% url 'bg_app:new_loan' game.id %}">Borrow this game</a>
-        </p>
+        <p> This game is available for loaning.</p>
     {% endfor %}
-</ul>
 
 {% endblock content %}
