@@ -12,5 +12,5 @@ class GameForm(forms.ModelForm):
 class LoanForm(forms.ModelForm):
     class Meta:
             model = Loan
-            fields = ['loaner', 'comment']
-            labels = {'loaner': 'Name', 'comment': 'Comment'}
+            fields = ['comment']
+            labels = {'comment': 'Comment'}

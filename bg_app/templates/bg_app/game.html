@@ -5,10 +5,12 @@
 {% endblock page_header %}
 
 {% block content %}
-<p>
-    <a href="{% url 'bg_app:edit_game' game.id %}">Edit game</a>
-</p>
 
+{% if request.user == game.owner %}
+    <p>
+        <a href="{% url 'bg_app:edit_game' game.id %}">Edit game</a>
+    </p>
+{% endif %}
 
 <ul>
     {% for loan in loans %} 
@@ -24,6 +26,7 @@
         </div>
     {% empty %}
         <p> This game is available for loaning.</p>
+        <a href="{% url 'bg_app:new_loan' game.id %}">Loan game</a>
     {% endfor %}
 
 {% endblock content %}
