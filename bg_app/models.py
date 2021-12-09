@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -11,6 +12,7 @@ class Game(models.Model):
 
     date_added = models.DateTimeField(auto_now_add=True) #automatically save the date when added
     date_modified = models.DateTimeField(auto_now=True) #automatically save the date when modified 
+    owner = models.ForeignKey(User, on_delete=models.CASCADE) #sets whose game it is
 
 
     def __str__(self):
@@ -21,7 +23,7 @@ class Game(models.Model):
 class Loan(models.Model):
     #info about the loans
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
-    loaner = models.TextField()
+    loaner = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField(max_length=300, blank=True, default='')#loaner may comment their loan
     date_loaned = models.DateTimeField(auto_now_add=True)
 
