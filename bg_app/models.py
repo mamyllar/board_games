@@ -17,7 +17,7 @@ class Game(models.Model):
 
     def __str__(self):
     #return a string representation of the model
-        return self.name
+        return self.name + ", " + self.number_of_players + " players"
 
 
 class Loan(models.Model):

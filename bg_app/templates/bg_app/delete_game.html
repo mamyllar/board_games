@@ -1,0 +1,14 @@
+{% extends "bg_app/base.html" %}
+
+{% block content %}
+
+    <p><a href="{% url 'bg_app:game' game.id %}">{{ game }}</a></p>
+
+    <small><p>Are you sure you want to delete this game?</p></small>
+
+    <form method='post'>
+        {% csrf_token %}
+        <button name="submit", style="color:brown">Yes, I'm sure</button>
+    </form>
+
+{% endblock content %}

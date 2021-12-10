@@ -8,7 +8,8 @@
 
 {% if request.user == game.owner %}
     <p>
-        <a href="{% url 'bg_app:edit_game' game.id %}">Edit game</a>
+        <a href="{% url 'bg_app:edit_game' game.id %}">Edit game</a> or 
+        <a href="{% url 'bg_app:delete_game' game.id %}">delete game</a>
     </p>
 {% endif %}
 
@@ -17,16 +18,29 @@
         <div class="card mb-3">
             <h4 class="card-header">
                 {{ loan.date_loaned|date:'M d, Y H:i' }}
-                <small><a href="{% url 'bg_app:edit_loan' loan.id %}">
-                    edit loan</a></small>
+                {% if request.user == loan.loaner %}
+                    <small>
+                        <a href="{% url 'bg_app:edit_loan' loan.id %}">
+                            Edit loan</a> or 
+                        <a href="{% url 'bg_app:delete_loan' loan.id %}">
+                            delete loan</a>
+                    </small>
+                {% else %}
+                    <small style="color:coral"> Game currently loaned.</small>
+                {% endif %}
             </h4>
             <div class="card-body">
-                {{ loan.loaner|linebreaks }}
+                Loaner: {{ loan.loaner|linebreaks }}
+                Message: {{ loan.comment|linebreaks }}
             </div>
         </div>
     {% empty %}
-        <p> This game is available for loaning.</p>
-        <a href="{% url 'bg_app:new_loan' game.id %}">Loan game</a>
+        {% if request.user == game.owner %}
+            <medium>This game is not loaned to anyone.</medium>
+        {% else %}
+            <medium> This game is available for loaning.</medium>
+            <medium><a href="{% url 'bg_app:new_loan' game.id %}">Loan game</a></medium>
+        {% endif %}
     {% endfor %}
 
 {% endblock content %}

@@ -116,8 +116,38 @@ def edit_loan(request, loan_id):
     return render(request, 'bg_app/edit_loan.html', context)   
 
 
+@login_required
+def delete_game(request, game_id):
+    # Delete an existing game
+    game = Game.objects.get(id=game_id)
 
+    # Check if game belongs to user trying to delete it
+    if game.owner != request.user:
+        raise Http404
 
+    if request.method == 'POST':
+        game.delete()
+        return redirect('bg_app:games')
+
+    context = {'game': game}
+    return render(request, 'bg_app/delete_game.html', context)
+
+@login_required
+def delete_loan(request, loan_id):
+    # Delete an existing loan AKA return the game
+    loan = Loan.objects.get(id=loan_id)
+    game = loan.game
+
+    # Check if loan belongs to user trying to delete it
+    if loan.loaner != request.user:
+        raise Http404
+
+    if request.method == 'POST':
+        loan.delete()
+        return redirect('bg_app:game', game_id=game.id)
+
+    context = {'loan': loan, 'game': game}
+    return render(request, 'bg_app/delete_loan.html', context)
 
 
 

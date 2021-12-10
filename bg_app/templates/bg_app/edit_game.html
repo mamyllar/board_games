@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <p>Edit game:</p>
+<small><p>Edit game:</p></small>
 
     <form action="{% url 'bg_app:edit_game' game.id %}" method='post'>
         {% csrf_token %}
