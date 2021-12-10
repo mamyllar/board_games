@@ -9,7 +9,7 @@
     <form action="{% url 'bg_app:edit_loan' loan.id %}" method='post'>
         {% csrf_token %}
         {{ form.as_p }} 
-        <button name="submit">Save changes</button>
+        <button name="submit", style="color:brown">Save changes</button>
     </form>
 
 {% endblock content %}
